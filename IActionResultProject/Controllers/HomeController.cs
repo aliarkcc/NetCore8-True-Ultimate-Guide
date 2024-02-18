@@ -1,45 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IActionResultProject.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IActionResultProject.Controllers
 {
     public class HomeController : Controller
     {
-        [Route("book")]
-        public IActionResult Index()
+        [Route("bookstore/{bookid?}/{isloggedin?}")]
+        //URL: /bookstore?bookid=10&isloggedin=true
+        public IActionResult Index(int? bookid, [FromRoute] bool? isloggedin,Book book)
         {
             //Book id should be applied
-            if (!Request.Query.ContainsKey("bookid"))
+            if (!bookid.HasValue)
             {
                 //return new BadRequestResult();
-                return BadRequest("Book id is not supplied");
-            }
-
-            //Book id can not be empty
-            if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
-            {
-                return BadRequest("Book id can't be null or empty");
+                return BadRequest("Book id is not supplied or empty");
             }
 
             //Book id should be between 1 to 1000
-            int bookId = Convert.ToInt16(ControllerContext.HttpContext.Request.Query["bookid"]);
-
-            if (bookId < 0)
+            if (bookid <= 0)
             {
                 return BadRequest("Book id can't be less then or equal to zero");
             }
 
-            if (bookId > 1000)
+            if (bookid > 1000)
             {
                 return NotFound("Book id can't be greater than 1000");
             }
 
-            if (Convert.ToBoolean(Request.Query["isloggedin"]) == false)
+            if (!isloggedin.HasValue || !isloggedin.Value)
             {
                 //return StatusCode(401);
                 return Unauthorized("User must be authenticated");
             }
 
-            string url = $"store/books/{bookId}";
+            string url = $"store/books/{bookid}";
+
+            return Content($"Book id: {bookid}, Book:{book}", "text/plain");
 
             //302 - Found
             //return new RedirectToActionResult("Books", "Store", new { id = bookId });
