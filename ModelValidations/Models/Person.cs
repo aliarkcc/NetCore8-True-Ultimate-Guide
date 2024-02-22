@@ -1,14 +1,15 @@
-﻿using ModelValidations.CustomValidators;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ModelValidations.CustomValidators;
 using System.ComponentModel.DataAnnotations;
 
 namespace ModelValidations.Models
 {
-    public class Person
+    public class Person : IValidatableObject
     {
         [Required(ErrorMessage = "{0} can't be empty or null!")]
         [Display(Name = "Person Name")]
         [StringLength(40, MinimumLength = 3, ErrorMessage = "{0} should be between {2} and {1} characters long!")]
-        [RegularExpression("^[A-Z-a-z .]$", ErrorMessage = "{0} should contain only alphabets, space and dot (.)")]
+        //[RegularExpression("^[A-Z-a-z .]$", ErrorMessage = "{0} should contain only alphabets, space and dot (.)")]
         public string? PersonName { get; set; }
 
 
@@ -50,11 +51,31 @@ namespace ModelValidations.Models
 
         //[MinimumYearValidator(2004,ErrorMessage = "Date of Birth should not be newer Jan 01, {0}")]
         [MinimumYearValidator(2004)]
+        [BindNever]
         public DateTime? DateOfBirth { get; set; }
 
+
+
+        public DateTime? FromDate { get; set; }
+
+
+        [DateRangeValidator("FromDate", ErrorMessage = "'From Date' should be older than to equal 'To Date'")]
+        public DateTime? ToDate { get; set; }
+
+
+        public int? Age { get; set; }
         public override string ToString()
         {
             return $"Person Object - Person Name:{PersonName}, Email:{Email}, Phone:{Phone}, Password:{Password}, ConfirmPassword:{ConfirmPassword}, Price: {Price}";
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!DateOfBirth.HasValue && !Age.HasValue)
+            {
+                yield return new ValidationResult("Either of Date of Birth or Age must be supplied!", new[] { nameof(Age), nameof(DateOfBirth) });
+            }
+
         }
     }
 }
