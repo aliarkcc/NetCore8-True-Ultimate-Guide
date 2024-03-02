@@ -1,0 +1,31 @@
+﻿@model Person
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Person Details</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Person Details</h1>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>DateOfBirth</td>
+            <td>@Model.DateOfBirth?.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>@Model.PersonGender</td>
+        </tr>
+    </table>
+
+    @{
+        //ArrayList
+    }
+</body>
+</html>

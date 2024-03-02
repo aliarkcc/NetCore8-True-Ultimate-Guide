@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllersProject", "Contr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IActionResultProject", "IActionResultProject\IActionResultProject.csproj", "{E67D65E9-C7FB-4A51-A6C9-C3248B46C6DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelValidations", "ModelValidations\ModelValidations.csproj", "{374D29A2-4A12-410E-802A-28FA10F256A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelValidations", "ModelValidations\ModelValidations.csproj", "{374D29A2-4A12-410E-802A-28FA10F256A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Views", "Views\Views.csproj", "{7E26AF55-6FEC-4BD3-A667-5DDC1DFC4201}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{374D29A2-4A12-410E-802A-28FA10F256A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{374D29A2-4A12-410E-802A-28FA10F256A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{374D29A2-4A12-410E-802A-28FA10F256A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E26AF55-6FEC-4BD3-A667-5DDC1DFC4201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E26AF55-6FEC-4BD3-A667-5DDC1DFC4201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E26AF55-6FEC-4BD3-A667-5DDC1DFC4201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E26AF55-6FEC-4BD3-A667-5DDC1DFC4201}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

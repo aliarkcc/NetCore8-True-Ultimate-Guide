@@ -1,0 +1,154 @@
+﻿@model IEnumerable<Person>
+@{
+    string appTitle = (string)ViewData["pageTitle"];
+
+    Person person = new() { Name = "Mali", DateOfBirth = Convert.ToDateTime("2002/01/02"), PersonGender = Gender.Male };
+
+    List<Person>? people = (List<Person>?)ViewData["people"];
+}
+
+@{
+    //local function
+    double? GetAge(DateTime? dateOfBirth)
+    {
+        if (dateOfBirth.HasValue)
+            return (DateTime.Now - dateOfBirth.Value).TotalDays / 365.25;
+
+        return null;
+    }
+
+    void GetPersonHtml(Person personItem)
+    {
+        <h2>Hello @personItem.Name</h2>
+        @if (personItem.DateOfBirth.HasValue)
+        {
+            double age = Math.Round((DateTime.Now - personItem.DateOfBirth).Value.TotalDays / 365.25);
+
+            <h2>@age years old</h2>
+        }
+        else
+        {
+            <h2>Date of Birh is unknown</h2>
+        }
+
+        @switch (personItem.PersonGender)
+        {
+            case Gender.Male:
+                <p>November 19 is International Men's Day</p>
+                break;
+            case Gender.Female:
+                <p>March 8 is International Women's Day</p>
+                break;
+            default:
+                break;
+        }
+
+        <a href="/person-details/@personItem.Name">Details</a>
+
+        <br />
+    }
+
+    string alertMessage = $"<script>alert('{people.Count} people found!')</script>";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@appTitle</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    @Html.Raw(alertMessage)
+    <h1>Welcome</h1>
+    <h2>Htllo @person.Name</h2>
+    @if (person.DateOfBirth.HasValue)
+    {
+        double age = Math.Round((DateTime.Now - person.DateOfBirth).Value.TotalDays / 365.25);
+
+        <h2>@age years old</h2>
+    }
+    else
+    {
+        <h2>Date of Birh is unknown</h2>
+    }
+
+    @switch (person.PersonGender)
+    {
+        case Gender.Male:
+            <p>November 19 is International Men's Day</p>
+            break;
+        case Gender.Female:
+            <p>March 8 is International Women's Day</p>
+            break;
+        default:
+            break;
+    }
+
+    #######################################
+    <h2>Person List</h2>
+
+
+    @foreach (var personItem in Model) // people
+    {
+        GetPersonHtml(personItem);
+        @*<h2>Hello @personItem.Name</h2>
+    @if (personItem.DateOfBirth.HasValue)
+    {
+    double age = Math.Round((DateTime.Now - personItem.DateOfBirth).Value.TotalDays / 365.25);
+
+    <h2>@age years old</h2>
+    }
+    else
+    {
+    <h2>Date of Birh is unknown</h2>
+    }
+
+    @switch (personItem.PersonGender)
+    {
+    case Gender.Male:
+    <p>November 19 is International Men's Day</p>
+    break;
+    case Gender.Female:
+    <p>March 8 is International Women's Day</p>
+    break;
+    default:
+    break;
+    }*@
+    }
+
+
+    @for (int i = 0; i < ViewBag.people.Count; i++)
+    {
+        Person personItem = ViewBag.people[i];
+
+        @:Hello to @personItem.Name
+        @if (personItem.DateOfBirth.HasValue)
+        {
+            double age = Math.Round((DateTime.Now - personItem.DateOfBirth).Value.TotalDays / 365.25);
+
+            <h2>@age years old</h2>
+        }
+        else
+        {
+            <h2>Date of Birh is unknown</h2>
+        }
+
+        @switch (personItem.PersonGender)
+        {
+            case Gender.Male:
+                <p>November 19 is International Men's Day</p>
+                break;
+            case Gender.Female:
+                <p>March 8 is International Women's Day</p>
+                break;
+            default:
+                break;
+        }
+
+        <a href="/person-details/@personItem.Name">Details</a>
+
+        <br />
+    }
+</body>
+</html>

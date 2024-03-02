@@ -1,0 +1,39 @@
+﻿@model PersonAndProductWrapperModel
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Person Details</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Person Details</h1>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>@Model.PersonData.Name</td>
+        </tr>
+        <tr>
+            <td>DateOfBirth</td>
+            <td>@Model.PersonData.DateOfBirth?.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>@Model.PersonData.PersonGender</td>
+        </tr>
+    </table>
+    <br />
+    <h1>Product Details</h1>
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>@Model.ProductData.Id</td>
+        </tr>
+        <tr>
+            <td>Product Name</td>
+            <td>@Model.ProductData.Name</td>
+        </tr>
+    </table>
+</body>
+</html>
